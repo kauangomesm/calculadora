@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@700&display=swap');
+
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-family: 'Kumbh Sans', sans-serif;
+}
+
+:root{
+    --cor-body: #3B4664;
+    --cor-resultado: #191F32;
+    --cor-font-primaria:#FDFFFF;
+    --cor-font-secundaria:#464E59;
+    --cor-teclado: #252D44;
+    --cor-teclas: #E9E3DC;
+    --cor-teclas-hover: #ffffff;
+    --cor-teclaEnter: #D13F30;
+    --cor-teclaEnter-hover: #ec5949;
+    --cor-teclaReset: #647298;
+    --cor-teclaReset-hover: #8b9dce;
+}
+
+body{
+    min-height: 100vh;
+    background-color: var(--cor-body);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 100px 0px;
+}
+
+#main{
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+#d_resultado{
+    background-color: var(--cor-resultado);
+    width: 100%;
+    height: 80px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    
+}
+
+#p_resultado{
+    color: var(--cor-font-primaria);
+    font-size: 32px;
+    padding: 16px;
+}
+
+#d_teclado{
+    width: 100%;
+    min-height: 300px;
+    border-radius: 8px;
+    background-color: var(--cor-teclado);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 20px;
+    align-content: center;
+
+    
+}
+
+.tecla{
+    border-radius: 8px;
+    background-color: var(--cor-teclas);
+    font-size: 20px;
+    flex-shrink: 1;
+    width: 65px;
+    height: 40px;
+    flex-grow: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.521);
+    cursor: pointer;
+}
+
+
+.tecla:hover{
+    background-color: var(--cor-teclas-hover);
+}
+
+
+#reset, #del{
+    background-color: var(--cor-teclaReset);
+    color: var(--cor-font-primaria);
+}
+
+#reset:hover, #del:hover{
+    background-color: var(--cor-teclaReset-hover);
+}
+
+
+#enter{
+    background-color: var(--cor-teclaEnter);
+    color: var(--cor-font-primaria);
+}
+
+
+#enter:hover{
+    background-color: var(--cor-teclaEnter-hover);
+    color: var(--cor-font-primaria);
+}
