@@ -38,6 +38,7 @@
                
         }
 
+        //Adicionando operadores
         if(e.target.getAttribute('class') === 'tecla op'){
             if(!p_resultado.textContent){
                 return
@@ -47,7 +48,9 @@
                 p_resultado.textContent += tecla
             }
             else{
-                soma()
+                
+                
+
             }
 
             
@@ -57,13 +60,11 @@
 
 
         
-
+        //Adicionando (.)
         if(e.target.getAttribute('id') === '.'){   
-            //  console.log('clicou')
 
             if(p_resultado.textContent){
 
-                // console.log('tem coisa')
 
                 if(findOp() === false){
                     if([...p_resultado.textContent].indexOf('.') === -1){
@@ -71,9 +72,31 @@
                     }
                 }
                 else{
-                    findindexop()
+
+                    const index = findindexop()
+                    if(index === undefined){
+                        return
+                    }
+                    else{
+                        if([...p_resultado.textContent].slice(index +1, [...p_resultado.textContent].length).indexOf('.') === -1){
+                            p_resultado.textContent += tecla 
+                        }
+                    }
+                    
+
                 }
             }
+        }
+
+        //Somar
+        if(e.target.getAttribute('id') === 'enter'){
+            
+            if(p_resultado.textContent === '' || findOp() === false || [...p_resultado.textContent].slice(findindexop() + 1, [...p_resultado.textContent].length) == ''){
+                return
+            }
+            
+                p_resultado.textContent = soma()
+            
         }
 
 
@@ -84,10 +107,15 @@
     function findindexop(){
         const operadores = ['+' , '-', 'x', '/']
         const tela = [...p_resultado.textContent]
+        let index = undefined
+        operadores.forEach((e) => {
+            if(tela.indexOf(e) != -1){
+                 index =  tela.indexOf(e)
+            }
+        })
 
-        
+        return index
 
-        
     }
     function findOp(){
 
@@ -101,6 +129,38 @@
             
         })
         
+    }
+
+    function soma(){
+
+        const tela = [...p_resultado.textContent]
+        const indexop = findindexop()
+        const op = tela[indexop]
+        if(indexop === undefined){
+            return
+        }
+        else{
+            const n1 = (parseFloat((tela.slice(0, indexop)).join('')))
+
+            const n2 = (parseFloat((tela.slice(indexop + 1, tela.length)).join('')))
+
+            if(op === '+'){
+                return n1 + n2
+            }
+            else if(op === '-'){
+                return n1 - n2
+            }
+            else if(op === 'x'){
+                return n1 * n2
+            }
+            else if(op === '/'){
+                return n1 / n2
+            }
+            
+            
+        }
+
+
     }
 
 
