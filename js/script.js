@@ -40,16 +40,28 @@
 
         //Adicionando operadores
         if(e.target.getAttribute('class') === 'tecla op'){
+
+            if(!p_resultado.textContent && e.target.getAttribute('id') === '-'){
+                p_resultado.textContent = tecla
+                return
+            }
             if(!p_resultado.textContent){
                 return
             }
+            
+            
 
+            console.log(findOp())
             if(findOp() === false){
                 p_resultado.textContent += tecla
             }
             else{
+                if([...p_resultado.textContent].slice(findindexop(), [...p_resultado.textContent].length) == ''){
+                    return
+                }
                 
-                
+                // p_resultado.textContent = soma()
+                // p_resultado.textContent += tecla
 
             }
 
@@ -74,7 +86,7 @@
                 else{
 
                     const index = findindexop()
-                    if(index === undefined){
+                    if(index == 0){
                         return
                     }
                     else{
@@ -91,10 +103,10 @@
         //Somar
         if(e.target.getAttribute('id') === 'enter'){
             
-            if(p_resultado.textContent === '' || findOp() === false || [...p_resultado.textContent].slice(findindexop() + 1, [...p_resultado.textContent].length) == ''){
+
+            if(p_resultado.textContent === '' || findOp() === false || [...p_resultado.textContent].slice(findindexop(), [...p_resultado.textContent].length) == ''){
                 return
             }
-            
                 p_resultado.textContent = soma()
             
         }
@@ -105,12 +117,22 @@
     }
 
     function findindexop(){
+        let index = 0
         const operadores = ['+' , '-', 'x', '/']
+
         const tela = [...p_resultado.textContent]
-        let index = undefined
+        let tela_agora = [...p_resultado.textContent]
+            if(tela[0] === '-'){
+                tela_agora = tela.slice(1, tela.length)
+                index = 1
+            }
+
+        
+
         operadores.forEach((e) => {
-            if(tela.indexOf(e) != -1){
-                 index =  tela.indexOf(e)
+            if(tela_agora.indexOf(e) != -1){
+
+                 index +=  parseInt(tela_agora.indexOf(e))
             }
         })
 
@@ -122,10 +144,15 @@
         const operadores = ['+' , '-', 'x', '/']
 
         const tela = [...p_resultado.textContent]
-
+        let tela_agora = [...p_resultado.textContent]
+            if(tela[0] === '-' && tela[1] != ''){
+                tela_agora = tela.slice(1, tela.length)
+            }
+            
+        
         return operadores.some(function (elemento) {
             
-             return tela.indexOf(elemento) != -1
+             return tela_agora.indexOf(elemento) != -1
             
         })
         
@@ -135,8 +162,11 @@
 
         const tela = [...p_resultado.textContent]
         const indexop = findindexop()
+
+        console.log(indexop)
+        
         const op = tela[indexop]
-        if(indexop === undefined){
+        if(indexop == 0){
             return
         }
         else{
