@@ -1,3 +1,4 @@
+
 // ;(function () {
     const p_resultado = document.getElementById('p_resultado')
     const d_teclado = document.getElementById('d_teclado')
@@ -40,34 +41,63 @@
 
         //Adicionando operadores
         if(e.target.getAttribute('class') === 'tecla op'){
-
             if(!p_resultado.textContent && e.target.getAttribute('id') === '-'){
                 p_resultado.textContent = tecla
                 return
             }
-            if(!p_resultado.textContent){
+            if(!p_resultado.textContent && e.target.getAttribute('id') != '-'){
                 return
             }
             
             
 
-            console.log(findOp())
-            if(findOp() === false){
+            
+            if([...p_resultado.textContent][0] === `-`){
+                if([...p_resultado.textContent].slice(1 ,[...p_resultado.textContent].length) == ``){
+                    return
+                }
+                else{
+                    if(findOp() === true){
+                        console.log([...p_resultado.textContent].slice(findindexop() + 1, [...p_resultado.textContent].length))
+                        if([...p_resultado.textContent].slice(findindexop() + 1, [...p_resultado.textContent].length) != ''){
+                            p_resultado.textContent = soma()
+                            p_resultado.textContent += tecla
+        
+                        }
+        
+                    }
+                    else{
+                        p_resultado.textContent += tecla
+                    }
+
+
+                }
+
+
+
+            }
+
+            if(findOp() === true){
+                console.log([...p_resultado.textContent].slice(findindexop() + 1, [...p_resultado.textContent].length))
+                if([...p_resultado.textContent].slice(findindexop() + 1, [...p_resultado.textContent].length) != ''){
+                    p_resultado.textContent = soma()
+                    p_resultado.textContent += tecla
+
+                }
+
+            }
+
+             else if (findOp() === false){
+                
                 p_resultado.textContent += tecla
             }
             else{
-                if([...p_resultado.textContent].slice(findindexop(), [...p_resultado.textContent].length) == ''){
+
+                if([...p_resultado.textContent].slice(findindexop() + 1, [...p_resultado.textContent].length) == ''){
+                    
                     return
                 }
-                
-                // p_resultado.textContent = soma()
-                // p_resultado.textContent += tecla
-
             }
-
-            
-
-
         }
 
 
@@ -104,7 +134,7 @@
         if(e.target.getAttribute('id') === 'enter'){
             
 
-            if(p_resultado.textContent === '' || findOp() === false || [...p_resultado.textContent].slice(findindexop(), [...p_resultado.textContent].length) == ''){
+            if(p_resultado.textContent === '' || findOp() === false || [...p_resultado.textContent].slice(findindexop() + 1, [...p_resultado.textContent].length) == ''){
                 return
             }
                 p_resultado.textContent = soma()
@@ -163,7 +193,7 @@
         const tela = [...p_resultado.textContent]
         const indexop = findindexop()
 
-        console.log(indexop)
+        
         
         const op = tela[indexop]
         if(indexop == 0){
