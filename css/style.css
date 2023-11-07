@@ -23,6 +23,7 @@
     --cor-box-shadow-teclas: #b4a398;
     --cor-box-shadow-reset: #424e73;
     --cor-box-shadow-enter: #883900;
+    --cor-proxtema: #c85401;
 }
 
 body{
@@ -55,40 +56,19 @@ header{
 header #d_tema{
     display: flex;
     gap: 20px;
+    padding: 5px;
 }
 
-header #temas{
-    background-color: var(--cor-teclado);
-    width: 60px;
-    height: 20px;
-    border-radius: 50px;
-    display: flex;
-    gap: 6px;
-    align-items: center;
-    justify-content: center;
-}
-
-
-.tema{
-    background-color: transparent;
-    width: 14px;
-    height: 14px;
-    border-radius: 50px;
-    cursor: pointer;
-
-}
-
-.tema.act{
-    display: block;
+#tema_1{
+    width: 30px;
+    height: 30px;
     background-color: var(--cor-teclaEnter);
-}
-.tema.act:hover{
-    display: block;
-    background-color: var(--cor-teclaEnter-hover);
+    border-radius: 20px;
 }
 
-
-
+#tema_1:hover{
+    animation: ;
+}
 
 #d_resultado{
     background-color: var(--cor-resultado);
