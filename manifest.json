@@ -3,17 +3,32 @@
   "name": "Calculadora",
   "icons": [
     {
-      "src": "/img/icon-192-192.png",
+      "src": "icons/48px/calculator - icon.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "48x48"
     },
     {
-      "src": "/img/icon-512-512.png",
+      "src": "icons/72px/calculator - icon.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "72x72"
+    },
+    {
+      "src": "icons/96px/calculator - icon.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "icons/144px/calculator - icon.png",
+      "type": "image/png",
+      "sizes": "144x144"
+    },
+    {
+      "src": "icons/192px/calculator - icon.png",
+      "type": "image/png",
+      "sizes": "192x192"
     }
   ],
-  "start_url": "/?utm=pwa",
+  "start_url": "/",
   "background_color": "#000000",
   "display": "fullscreen",
   "orientation": "portrait",
