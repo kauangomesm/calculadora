@@ -26,6 +26,11 @@
       "src": "icons/192px/calculator - icon.png",
       "type": "image/png",
       "sizes": "192x192"
+    },
+    {
+      "src": "icons/512px/calculator - icon.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
   "start_url": "/",
