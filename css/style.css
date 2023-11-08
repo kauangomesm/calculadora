@@ -23,7 +23,7 @@
     --cor-box-shadow-teclas: #b4a398;
     --cor-box-shadow-reset: #424e73;
     --cor-box-shadow-enter: #883900;
-    --cor-proxtema: #c85401;
+    --cor-proxtema: #00decf;
 }
 
 body{
@@ -64,10 +64,13 @@ header #d_tema{
     height: 30px;
     background-color: var(--cor-teclaEnter);
     border-radius: 20px;
+    transition-property: background-color, scale;
+    transition-duration: 1s;
 }
 
 #tema_1:hover{
-    animation: ;
+    background-color: var(--cor-proxtema);
+    scale: 0.9;
 }
 
 #d_resultado{
