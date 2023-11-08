@@ -58,6 +58,11 @@
     Coded by <a href="https://github.com/kauangomesm" target="_blank">Kauan.G</a>.
   </div>
   <script src="js/script.js"></script>
+  <script>
+    if (typeof navigator.serviceWorker !== 'undefined') {
+      navigator.serviceWorker.register('sw.js')
+    }
+  </script>
   
 </body>
 </html>
