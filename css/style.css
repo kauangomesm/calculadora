@@ -79,15 +79,33 @@ header #d_tema{
     height: 80px;
     border-radius: 8px;
     display: flex;
-    flex-direction: row-reverse;
-    align-items: center;
+    flex-direction: column;
+    padding-right: 10px;
     
 }
 
 #p_resultado{
     color: var(--cor-font-primaria);
     font-size: 32px;
-    padding: 16px;
+    display: flex;
+    justify-content: right;
+    
+}
+#telaAux{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    height: 20px;
+    
+}
+
+#aux{
+    color: var(--cor-font-secundaria);
+}
+
+#operação{
+    color: var(--cor-font-secundaria);
 }
 
 #d_teclado{
@@ -135,6 +153,9 @@ header #d_tema{
     background-color: var(--cor-teclaReset);
     color: var(--cor-font-terciaria);
     box-shadow: 2px 2px 0px 0px var(--cor-box-shadow-reset);
+}
+#del > svg{
+    width: 25px;
 }
 
 #reset:hover, #del:hover{

@@ -1,19 +1,14 @@
-
-
 ;(function () {
     const p_resultado = document.getElementById('p_resultado')
     const d_teclado = document.getElementById('d_teclado')
     const d_temas = document.getElementById('tema_1')
+    const d_numero = document.getElementById('aux')
+    const d_operacao = document.getElementById('operação')
     aux = null;
-    console.log(aux);
-
-
-
+    operacao = null;
     //Variaveis de cores CSS
     const root = document.querySelector(':root')
     const temas = [...d_temas.children]
-
-
     function clicoutemas(){
         if(d_temas.getAttribute('tema') != 2){
             d_temas.setAttribute('tema', parseInt(d_temas.getAttribute('tema')) + 1)
@@ -79,51 +74,60 @@
         }
     }
 }
-
-
     function clicouTeclado(e)
     {
         //Limpa a tela
-         if(e.target.getAttribute('id') === 'reset'){
-            
+         if(e.target.getAttribute('id') === 'reset'){   
             p_resultado.textContent = ''
+            aux = null;
+            operacao= null;
+            d_numero.textContent = '';
+            d_operacao.textContent = ''; 
         }
-
         //remove o ultimo numero
-        if(e.target.getAttribute('id') === 'del'){
-            
+        if(e.target.getAttribute('icone') === 'del'){
             const a = [...p_resultado.textContent]
             a.pop()
-            p_resultado.textContent = a.join('')
-               
+            p_resultado.textContent = a.join('')      
         }
-
-        // Verifica se é possivel adicionar o elemento a conta
+        // Verifica se é possivel adicionar o elemento a operação
         if(p_resultado.textContent.length <17 && possoAdicionar(e))
         {
             p_resultado.textContent += e.target.textContent;
         }
-
-
         else
         {
-            if(temNum())
+            if(temNum() && aux !=null && e.target.getAttribute('id') === 'enter')
             {
-                if(aux != null)
-                {
-                    
-                }
+                resultado = Somar(aux, p_resultado.textContent, operacao);
+                aux = null;
+                d_numero.textContent = '';
+                operacao = null;
+                d_operacao.textContent = '';
+                p_resultado.textContent = resultado;
+            }
+            else if(temNum() && aux !=null && e.target.getAttribute('class') === 'tecla op')
+            {
+                resultado = Somar(aux, p_resultado.textContent, operacao);
+                aux = resultado;
+                d_numero.textContent = aux;
+                operacao = e.target.textContent;
+                d_operacao.textContent = operacao;
+                p_resultado.textContent = '';
+            }
+            else if(temNum() && aux === null && e.target.getAttribute('class') === 'tecla op')
+            {
+                aux = p_resultado.textContent;
+                d_numero.textContent = aux;
+                p_resultado.textContent= '';
+                operacao = e.target.textContent;
+                d_operacao.textContent = operacao; 
             }
         }
     }
-
-    d_teclado.addEventListener("click", clicouTeclado)
-
-    d_temas.addEventListener("click", clicoutemas)
-     
+    d_teclado.addEventListener("click", clicouTeclado);
+    d_temas.addEventListener("click", clicoutemas); 
 })()
-
-
 function possoAdicionar(e)
 {
     if(p_resultado.textContent == "")
@@ -144,10 +148,7 @@ function possoAdicionar(e)
          {
             return true;
          }
-    
-    }
-
-        
+    }     
 }
 
 function temNum()
@@ -170,10 +171,20 @@ function temNum()
     }
     else
         return false;
-    
-        
-            
-    
-    
-    
+}
+
+function Somar(num1, num2, operacao)
+{
+    num1 = parseInt(num1)
+    num2 = parseInt(num2)
+    if(operacao === '+')
+         return num1+num2
+    if(operacao === '-')
+         return num1-num2
+    if(operacao === 'x')
+         return num1*num2
+    if(operacao === '÷' && typeof(num1/num2) === 'Number')
+         return num1/num2
+    else
+        return 0
 }
