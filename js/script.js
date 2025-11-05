@@ -127,8 +127,8 @@
     }
     d_teclado.addEventListener("click", clicouTeclado);
     d_temas.addEventListener("click", clicoutemas); 
-})()
-function possoAdicionar(e)
+
+    function possoAdicionar(e)
 {
     if(p_resultado.textContent == "")
     {   
@@ -188,3 +188,4 @@ function Somar(num1, num2, operacao)
     else
         return 0
 }
+})()
