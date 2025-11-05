@@ -1,8 +1,11 @@
 
+
 ;(function () {
     const p_resultado = document.getElementById('p_resultado')
     const d_teclado = document.getElementById('d_teclado')
     const d_temas = document.getElementById('tema_1')
+    aux = null;
+    console.log(aux);
 
 
 
@@ -78,31 +81,15 @@
 }
 
 
-    function clicouTeclado(e){
-
-        // retorna a função se o click foi no elemento pai
-        if(e.target.getAttribute('id') === 'd_teclado'){
-            return
-        }
-        
-        // cria uma constante tecla para o valor do id
-       const tecla = e.target.getAttribute('id')
-
-
-
-       // se for um numero adiciona ele ao visor / resultado 
-        if(e.target.getAttribute('class') === 'tecla num'){
-
-            p_resultado.textContent += tecla
-        }
-
-        //simplesmente limpa o p_resultado
-        if(e.target.getAttribute('id') === 'reset'){
+    function clicouTeclado(e)
+    {
+        //Limpa a tela
+         if(e.target.getAttribute('id') === 'reset'){
             
             p_resultado.textContent = ''
         }
 
-        //remove o ultimo numero ou operador digitado
+        //remove o ultimo numero
         if(e.target.getAttribute('id') === 'del'){
             
             const a = [...p_resultado.textContent]
@@ -111,194 +98,82 @@
                
         }
 
-        //Adicionando operadores
-        if(e.target.getAttribute('class') === 'tecla op'){
-            if(!p_resultado.textContent && e.target.getAttribute('id') === '-'){
-                p_resultado.textContent = tecla
-                return
-            }
-            if(!p_resultado.textContent && e.target.getAttribute('id') != '-'){
-                return
-            }
-            
-            
-
-            
-            if([...p_resultado.textContent][0] === `-`){
-                if([...p_resultado.textContent].slice(1 ,[...p_resultado.textContent].length) == ``){
-                    return
-                }
-                else{
-                    if(findOp() === true){
-                        console.log([...p_resultado.textContent].slice(findindexop() + 1, [...p_resultado.textContent].length))
-                        if([...p_resultado.textContent].slice(findindexop() + 1, [...p_resultado.textContent].length) != ''){
-                            p_resultado.textContent = soma()
-                            p_resultado.textContent += tecla
-        
-                        }
-        
-                    }
-                    else{
-                        p_resultado.textContent += tecla
-                    }
+        // Verifica se é possivel adicionar o elemento a conta
+        if(p_resultado.textContent.length <17 && possoAdicionar(e))
+        {
+            p_resultado.textContent += e.target.textContent;
+        }
 
 
-                }
-
-
-
-            }
-
-            if(findOp() === true){
-                console.log([...p_resultado.textContent].slice(findindexop() + 1, [...p_resultado.textContent].length))
-                if([...p_resultado.textContent].slice(findindexop() + 1, [...p_resultado.textContent].length) != ''){
-                    p_resultado.textContent = soma()
-                    p_resultado.textContent += tecla
-
-                }
-
-            }
-
-             else if (findOp() === false){
-                
-                p_resultado.textContent += tecla
-            }
-            else{
-
-                if([...p_resultado.textContent].slice(findindexop() + 1, [...p_resultado.textContent].length) == ''){
+        else
+        {
+            if(temNum())
+            {
+                if(aux != null)
+                {
                     
-                    return
                 }
             }
         }
-
-
-        
-        //Adicionando (.)
-        if(e.target.getAttribute('id') === '.'){   
-
-            if(p_resultado.textContent){
-
-
-                if(findOp() === false){
-                    if([...p_resultado.textContent].indexOf('.') === -1){
-                        p_resultado.textContent += tecla
-                    }
-                }
-                else{
-
-                    const index = findindexop()
-                    if(index == 0){
-                        return
-                    }
-                    else{
-                        if([...p_resultado.textContent].slice(index +1, [...p_resultado.textContent].length).indexOf('.') === -1){
-                            p_resultado.textContent += tecla 
-                        }
-                    }
-                    
-
-                }
-            }
-        }
-
-        //Somar
-        if(e.target.getAttribute('id') === 'enter'){
-            
-
-            if(p_resultado.textContent === '' || findOp() === false || [...p_resultado.textContent].slice(findindexop() + 1, [...p_resultado.textContent].length) == ''){
-                return
-            }
-                p_resultado.textContent = soma()
-            
-        }
-
-
-        
-
     }
-
-    function findindexop(){
-        let index = 0
-        const operadores = ['+' , '-', 'x', '/']
-
-        const tela = [...p_resultado.textContent]
-        let tela_agora = [...p_resultado.textContent]
-            if(tela[0] === '-'){
-                tela_agora = tela.slice(1, tela.length)
-                index = 1
-            }
-
-        
-
-        operadores.forEach((e) => {
-            if(tela_agora.indexOf(e) != -1){
-
-                 index +=  parseInt(tela_agora.indexOf(e))
-            }
-        })
-
-        return index
-
-    }
-    function findOp(){
-
-        const operadores = ['+' , '-', 'x', '/']
-
-        const tela = [...p_resultado.textContent]
-        let tela_agora = [...p_resultado.textContent]
-            if(tela[0] === '-' && tela[1] != ''){
-                tela_agora = tela.slice(1, tela.length)
-            }
-            
-        
-        return operadores.some(function (elemento) {
-            
-             return tela_agora.indexOf(elemento) != -1
-            
-        })
-        
-    }
-
-    function soma(){
-
-        const tela = [...p_resultado.textContent]
-        const indexop = findindexop()
-
-        
-        
-        const op = tela[indexop]
-        if(indexop == 0){
-            return
-        }
-        else{
-            const n1 = (parseFloat((tela.slice(0, indexop)).join('')))
-
-            const n2 = (parseFloat((tela.slice(indexop + 1, tela.length)).join('')))
-
-            if(op === '+'){
-                return n1 + n2
-            }
-            else if(op === '-'){
-                return n1 - n2
-            }
-            else if(op === 'x'){
-                return n1 * n2
-            }
-            else if(op === '/'){
-                return n1 / n2
-            }
-            
-            
-        }
-
-
-    }
-
-
 
     d_teclado.addEventListener("click", clicouTeclado)
 
     d_temas.addEventListener("click", clicoutemas)
      
 })()
+
+
+function possoAdicionar(e)
+{
+    if(p_resultado.textContent == "")
+    {   
+        //Adiciona o elemento quando a conta está vazia se o elemento for um numero ou "-" ou um "."
+        if(e.target.getAttribute('class') === 'tecla num' || e.target.getAttribute('id') === '-' || e.target.getAttribute('id') === '.')
+        {
+            return true;
+        }     
+    }
+    else
+    {
+         if(e.target.getAttribute('class') === 'tecla num')
+         {
+            return true;
+         }
+         else if (e.target.getAttribute('id') === '.' && !p_resultado.textContent.includes('.'))
+         {
+            return true;
+         }
+    
+    }
+
+        
+}
+
+function temNum()
+{
+    tela = [...p_resultado.textContent]
+    numeros = ['0','1','2','3','4','5','6','7','8','9']
+    bool = false;
+
+    tela.forEach(function(elemento) {
+        if(numeros.includes(elemento))
+        {
+            if(bool === false)
+                bool = true;
+            
+        }
+    })
+    if(bool)
+    {
+        return true;
+    }
+    else
+        return false;
+    
+        
+            
+    
+    
+    
+}
